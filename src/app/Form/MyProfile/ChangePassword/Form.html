@@ -1,0 +1,23 @@
+<form [ngFormModel]="model" (submit)="fireSubmitted($event)">
+	<div class="form-group" >
+		<form-errors [control]="model"></form-errors>
+	</div>
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.oldPassword"></label>
+		<input class="form-control" [ngFormControl]="model.controls.oldPassword"/>
+		<form-errors [control]="model.controls.oldPassword"
+		             [map]="{required:{message:'Old password is required'}}"
+		></form-errors>
+	</div>
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.newPassword"></label>
+		<input class="form-control" [ngFormControl]="model.controls.newPassword"/>
+		<form-errors [control]="model.controls.newPassword"
+		             [map]="{required:{message:'New password is required'}}"
+		></form-errors>
+	</div>
+
+	<div class="form-group buttons">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</div>
+</form>

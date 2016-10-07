@@ -1,0 +1,15 @@
+<form class="block-user" [ngFormModel]="model" (submit)="fireSubmitted($event)">
+	<div class="form-group">
+		<form-errors [control]="model"></form-errors>
+		<div class="input-group">
+			<input class="form-control"
+			       [ngFormControl]="model.controls.blocked"
+			       [attr.placeholder]="model.controls.blocked.getLabel()"/>
+			<input type="hidden" class="form-control" [ngFormControl]="model.controls.blocker"/>
+		<span class="input-group-btn">
+	        <button class="btn btn-primary" type="submit">Add To Block List</button>
+        </span>
+		</div>
+		<form-errors [control]="model.controls.blocked"></form-errors>
+	</div>
+</form>

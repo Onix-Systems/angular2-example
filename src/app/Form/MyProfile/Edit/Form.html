@@ -1,0 +1,39 @@
+<form [ngFormModel]="model" (submit)="fireSubmitted($event)">
+	<div class="form-group" >
+		<form-errors [control]="model"></form-errors>
+	</div>
+
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.email"></label>
+		<input class="form-control" [ngFormControl]="model.controls.email"/>
+		<form-errors [control]="model.controls.email"
+		             [map]="{
+	                required:{message: 'Email is required', type: 'danger'}
+	             }"
+		></form-errors>
+	</div>
+
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.firstName"></label>
+		<input class="form-control" [ngFormControl]="model.controls.firstName"/>
+		<form-errors [control]="model.controls.firstName"
+		             [map]="{
+	                required:{message: 'First Name is required', type: 'danger'}
+	             }"
+		></form-errors>
+	</div>
+
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.surName"></label>
+		<input class="form-control" [ngFormControl]="model.controls.surName"/>
+		<form-errors [control]="model.controls.surName"
+		             [map]="{
+	                required:{message: 'Surname is required', type: 'danger'}
+	             }"
+		></form-errors>
+	</div>
+
+	<div class="form-group buttons">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</div>
+</form>

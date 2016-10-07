@@ -1,0 +1,92 @@
+<div class="header-logged-component">
+	<table *ngIf="list.result" class="table table-hover table-striped table-bordered">
+		<thead class="thead-default">
+		<tr>
+			<td colspan="5">
+				<div class="form-reported-post-list-filter-component" [(model)]="listFilterModel"
+				     (submitted)="doGo($event)"></div>
+			</td>
+		</tr>
+		</thead>
+		<thead class="thead-default">
+		<tr>
+			<th class="list-sort-label" [sortBy]="['id']" [list]="list">#</th>
+			<th class="list-sort-label" [sortBy]="['owner']" [list]="list">Reported Post Owner</th>
+			<th class="list-sort-label" [sortBy]="['type']" [list]="list">Post Type</th>
+			<th class="list-sort-label" [sortBy]="['reportsTotal']" [list]="list">Reports Total</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody *ngIf="list.result.items.length">
+		<template ngFor #item [ngForOf]="list.result.items" #i="index">
+			<tr (click)="item.cardIsOpened = !item.cardIsOpened" style="cursor: pointer">
+				<th scope="row">{{ item.id }}</th>
+				<td>{{ item.owner.username }} ({{ item.owner.firstName }} {{ item.owner.surName }} <{{ item.owner.email }}>)</td>
+				<td>{{ mapPostType(item.type) }}</td>
+				<td>{{ item.reports.length }}</td>
+				<th>
+					<button class="btn" (click)="removeReportItem($event, item)">Ignore</button>
+					<button class="btn btn-danger" (click)="removeReportedItem($event, item)">Delete post</button>
+				</th>
+			</tr>
+			<tr *ngIf="item.cardIsOpened">
+				<td colspan="5">
+					<div class="card">
+						<div class="card-block">
+							<div class="card-text">
+								<div class="row">
+									<div class="col-md-4" *ngIf="item.file.thumbnails">
+										<a style="cursor:pointer" (click)="openPopup($event, 'http://'.concat(item.file.host, '/', item.file.path), item.type)">
+											<img class="media-object"
+												 [attr.src]="'http://'.concat(item.file.thumbnails.main.host, '/', item.file.thumbnails.main.path)"
+												 [attr.alt]="item.caption"/>
+										</a>
+									</div>
+									<div class="col-md-8">
+										<div class="row">
+											<div class="col-xs-4"><label>Owner Username:</label></div>
+											<div class="col-xs-8">{{ item.owner.username }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Caption:</label></div>
+											<div class="col-xs-8">{{ item.caption }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Post Type:</label></div>
+											<div class="col-xs-8">{{ mapPostType(item.type) }}</div>
+										</div>
+									</div>
+								</div>
+								<hr />
+								<div class="row">
+									<div class="col-md-1" ><strong>#</strong></div>
+									<div class="col-md-11" ><strong>Reported By</strong></div>
+								</div>
+								<hr />
+								<template ngFor #report [ngForOf]="item.reports" #i="index">
+									<div class="row">
+										<div class="col-md-1" >{{ report.id }}</div>
+										<div class="col-md-11" >{{ report.reporter.username }} ({{ report.reporter.firstName }} {{ report.reporter.surName }} <{{ report.reporter.email }}>)</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</template>
+		</tbody>
+		<tbody *ngIf="!list.result.items.length">
+		<tr>
+			<td colspan="5" class="td-no-items-found">No items found</td>
+		</tr>
+		</tbody>
+		<tfoot class="thead-default">
+		<tr>
+			<td colspan="5" class="td-pagination">
+				<span class="list-pagination" [list]="list"></span>
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+</div>

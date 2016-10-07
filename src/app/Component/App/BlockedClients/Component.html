@@ -1,0 +1,77 @@
+<div class="header-logged-component">
+	<table *ngIf="list.result" class="table table-hover table-striped table-bordered">
+		<thead class="thead-default">
+		<tr>
+			<td colspan="4">
+				<div class="form-blocked-client-list-filter-component" [(model)]="listFilterModel"
+				     (submitted)="doGo($event)"></div>
+			</td>
+		</tr>
+		</thead>
+		<thead class="thead-default">
+		<tr>
+			<th class="list-sort-label" [sortBy]="['id']" [list]="list">#</th>
+			<th class="list-sort-label" [sortBy]="['client']" [list]="list">Client</th>
+			<th class="list-sort-label" [sortBy]="['blockedTotal']" [list]="list">Blocked Total</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody *ngIf="list.result.items.length">
+		<template ngFor #item [ngForOf]="list.result.items" #i="index">
+			<tr (click)="item.cardIsOpened = !item.cardIsOpened" style="cursor: pointer">
+				<th scope="row">{{ item.id }}</th>
+				<td>{{ item.username }} ({{ item.firstName }} {{ item.surName }} <{{ item.email }}>)</td>
+				<td>{{ item.blocked.length }}</td>
+				<th (click)="$event.stopPropagation()">
+					<div class="form-blocked-block-user-component"
+					     [(model)]="item.blockedClientsBlockUserModel"
+					     (submitted)="addClientToBlockList($event)"></div>
+				</th>
+			</tr>
+			<tr *ngIf="item.cardIsOpened">
+				<td colspan="4">
+					<div class="card">
+						<div class="card-block">
+							<div class="card-text">
+								<div class="row">
+									<div class="col-md-1"><strong>#</strong></div>
+									<div class="col-md-11"><strong>Blocked</strong></div>
+								</div>
+								<hr/>
+								<template ngFor #blockedItem [ngForOf]="item.blocked" #i="index">
+									<div class="row" style="margin-bottom: 10px;">
+										<div class="col-md-1">{{ blockedItem.id }}</div>
+										<div class="col-md-9">
+											{{ blockedItem.blockedEntity.username }} ({{
+											blockedItem.blockedEntity.firstName }} {{
+											blockedItem.blockedEntity.surName }} <{{ blockedItem.blockedEntity.email
+											}}>)
+										</div>
+										<div class="col-md-2">
+											<button class="btn btn-danger" (click)="unblockClient($event, blockedItem)">
+												Unblock
+											</button>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</template>
+		</tbody>
+		<tbody *ngIf="!list.result.items.length">
+		<tr>
+			<td colspan="4" class="td-no-items-found">No items found</td>
+		</tr>
+		</tbody>
+		<tfoot class="thead-default">
+		<tr>
+			<td colspan="4" class="td-pagination">
+				<span class="list-pagination" [list]="list"></span>
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+</div>

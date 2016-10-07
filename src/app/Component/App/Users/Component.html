@@ -1,0 +1,94 @@
+<div class="header-logged-component">
+	<table *ngIf="list.result" class="table table-hover table-striped table-bordered">
+		<thead class="thead-default">
+		<tr>
+			<td colspan="6">
+				<div class="form-users-list-filter-component" [(model)]="listFilterModel"
+				     (submitted)="doGo($event)"></div>
+			</td>
+		</tr>
+		</thead>
+		<thead class="thead-default">
+		<tr>
+			<th class="list-sort-label" [sortBy]="['id']" [list]="list">#</th>
+			<th class="list-sort-label" [sortBy]="['username']" [list]="list">Username</th>
+			<th class="list-sort-label" [sortBy]="['email']" [list]="list">Email</th>
+			<th class="list-sort-label" [sortBy]="['firstName']" [list]="list">First Name</th>
+			<th class="list-sort-label" [sortBy]="['surName']" [list]="list">Surname</th>
+			<th>Posts Total</th>
+		</tr>
+		</thead>
+		<tbody *ngIf="list.result.items.length">
+		<template ngFor #item [ngForOf]="list.result.items" #i="index">
+			<tr (click)="item.cardIsOpened = !item.cardIsOpened" style="cursor: pointer">
+				<th scope="row">{{item.id}}</th>
+				<td>{{item.username}}</td>
+				<td>{{item.email}}</td>
+				<td>{{item.firstName}}</td>
+				<td>{{item.surName}}</td>
+				<td>{{item.postsTotal}}</td>
+			</tr>
+			<tr *ngIf="item.cardIsOpened">
+				<td colspan="7">
+					<div class="card">
+						<div class="card-block">
+							<div class="card-text">
+								<div class="row">
+									<div class="col-md-4" *ngIf="item.photo.thumbnails">
+										<img class="media-object"
+										     [attr.src]="'http://'.concat(item.photo.thumbnails.main.host, '/', item.photo.thumbnails.main.path)"
+										     [attr.alt]="item.username + ' photo'"/>
+									</div>
+									<div class="col-md-6">
+										<div class="row">
+											<div class="col-xs-4"><label>Username:</label></div>
+											<div class="col-xs-8">{{ item.username }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Email:</label></div>
+											<div class="col-xs-8">{{ item.email }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Account Type:</label></div>
+											<div class="col-xs-8">{{ mapAccountType(item.accountType) }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>First Name:</label></div>
+											<div class="col-xs-8">{{ item.firstName }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Surname:</label></div>
+											<div class="col-xs-8">{{ item.surName }}</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4"><label>Tag Line:</label></div>
+											<div class="col-xs-8" style="word-break: break-all;">{{ item.tagLine }}</div>
+										</div>
+									</div>
+									<div class="col-md-offset-10 col-md-pull-2 buttons">
+										<button class="btn btn-primary" (click)="item.cardIsOpened = false">Close</button>
+										<button class="btn btn-primary" (click)="gotoPosts(item)">Posts</button>
+										<button class="btn btn-danger" (click)="removeItem(item)">Delete user</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</template>
+		</tbody>
+		<tbody *ngIf="!list.result.items.length">
+		<tr>
+			<td colspan="6" class="td-no-items-found">No items found</td>
+		</tr>
+		</tbody>
+		<tfoot class="thead-default">
+		<tr>
+			<td colspan="6" class="td-pagination">
+				<span class="list-pagination" [list]="list"></span>
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+</div>

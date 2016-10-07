@@ -1,0 +1,16 @@
+<div class="header-logged-component">
+	<tabset [justified]="true">
+		<tab heading="Edit Profile">
+			<div class="jumbotron">
+				<div class="form-my-profile-edit-component" [(model)]="currentUserModel"
+				     (submitted)="doSave($event)"></div>
+			</div>
+		</tab>
+		<tab heading="Change Password">
+			<div class="jumbotron">
+				<div class="form-my-profile-change-password-component" [(model)]="changePasswordModel"
+				     (submitted)="doChangePassword($event)"></div>
+			</div>
+		</tab>
+	</tabset>
+</div>

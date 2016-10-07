@@ -1,0 +1,28 @@
+<form [ngFormModel]="model" (submit)="fireSubmitted($event)">
+	<div class="form-group">
+		<form-errors [control]="model"></form-errors>
+	</div>
+
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.username"></label>
+		<input class="form-control" [ngFormControl]="model.controls.username"/>
+		<form-errors [control]="model.controls.username"
+		             [map]="{
+	                required:{message: 'Login is required', type: 'danger'}
+	             }"
+		></form-errors>
+	</div>
+	<div class="form-group">
+		<label class="form-control-label" [control]="model.controls.password"></label>
+		<input type="password" class="form-control" [ngFormControl]="model.controls.password"/>
+		<form-errors [control]="model.controls.password"
+		             [map]="{
+	                required:{message: 'Password is required', type: 'danger'}
+	             }"
+		></form-errors>
+	</div>
+
+	<div class="form-group buttons">
+		<button type="submit" class="btn btn-primary">Login</button>
+	</div>
+</form>

@@ -1,0 +1,37 @@
+module.exports = {
+	title: 'Project Admin Area',
+	theme: 'default',
+	baseUrl: './',
+	server: {
+		host: 'project-api.web.office',
+		port: 3000
+	},
+	restAPI: {
+		baseUrl: 'http://project-api.web.office/api/v1'
+	},
+	ENV: {
+		dev: {
+			title: 'Project Admin Area',
+			theme: 'default',
+			baseUrl: '/',
+			restAPI:{
+				baseUrl: 'http://project-api.web.office/app_dev.php/api/v1'
+			},
+			server: {
+				host: 'project-api.web.office',
+				port: 3000
+			}
+		},
+		prod: {
+			baseUrl: '/admin/',
+			restAPI:{
+				baseUrl: '//projectapp.com/api/v1'
+			},
+			server: {
+				host: 'projectapp.com',
+				port: 80
+			}
+		}
+
+	}
+};

@@ -1,0 +1,61 @@
+@import "./glyphicons/glyphicons.css";
+
+body {
+}
+
+.app-component {
+  @import "App";
+}
+
+.app-login-component {
+  @import "App/Login";
+}
+
+.form-user-login-component {
+  @import "Form/User/Login/Form";
+}
+
+.header-logged {
+  > header {
+	margin: 0 0 30px 0;
+	.navbar-brand {
+	  margin-right: 60px;
+	}
+  }
+  > footer {
+	margin: 30px 0 0 0;
+  }
+  article {
+	margin: 15px 0;
+  }
+}
+
+
+.form-control-message {
+  margin: 5px 15px;
+}
+
+.table {
+  .td-pagination {
+	text-align: center;
+  }
+  .td-no-items-found {
+	text-align: center;
+	color: red;
+  }
+  .card {
+	.buttons {
+	  .btn {
+		width: 100%;
+		margin-bottom: 15px;
+		&.btn-danger {
+		  margin-top: 30px;
+		}
+	  }
+	}
+  }
+  .btn-sort {
+	margin: 0 5px;
+	cursor: pointer;
+  }
+}

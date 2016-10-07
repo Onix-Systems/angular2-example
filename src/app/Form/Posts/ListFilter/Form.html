@@ -1,0 +1,38 @@
+<form class="list-filter" [ngFormModel]="model" (submit)="fireSubmitted($event)">
+	<div class="row">
+		<div class="col-lg-4 col-md-6">
+			<div class="form-group">
+				<div class="input-group">
+					<input class="form-control" [ngFormControl]="model.controls.username"
+					       [attr.placeholder]="model.controls.username.getLabel()"/>
+					<label class="input-group-addon" [attr.title]="model.controls.usernameExactly.getLabel()"
+					       [control]="model.controls.usernameExactly">
+						<input type="checkbox" [ngFormControl]="model.controls.usernameExactly"/>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6">
+			<div class="form-group">
+				<div class="input-group">
+					<input class="form-control" [ngFormControl]="model.controls.keyword"
+					       [attr.placeholder]="model.controls.keyword.getLabel()"/>
+					<label class="input-group-addon" [attr.title]="model.controls.keywordExactly.getLabel()"
+					       [control]="model.controls.keywordExactly">
+						<input type="checkbox" [ngFormControl]="model.controls.keywordExactly"/>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="choice" [ngFormControl]="model.controls.postType"/>
+			</div>
+		</div>
+		<div class="col-lg-1 col-md-6">
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary pull-md-right">Go</button>
+			</div>
+		</div>
+	</div>
+</form>
