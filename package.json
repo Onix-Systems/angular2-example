@@ -96,7 +96,7 @@
     "typings": "^0.6.7",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1",
+    "webpack-dev-server": "^3.1.11",
     "webpack-load-plugins": "^0.1.2",
     "webpack-md5-hash": "^0.0.4"
   },
